@@ -1,0 +1,95 @@
+.tableContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto; /* Para que sea responsiva en móviles */
+}
+
+.table {
+    display: flex;
+    width: 100%;
+    min-width: 800px; /* Ancho mínimo para evitar que se comprima demasiado */
+    border: 1px solid #233554;
+    border-radius: 10px;
+    background-color: #112240;
+}
+
+.featuresColumn, .planColumn {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 25%;
+    flex-grow: 1;
+}
+
+.planColumn {
+    text-align: center;
+    border-left: 1px solid #233554;
+}
+
+.headerCell, .featureCell, .valueCell, .buttonCell {
+    padding: 1.2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #233554;
+}
+
+.featureCell {
+    justify-content: flex-start;
+    font-weight: 600;
+    color: var(--blanco-texto);
+}
+
+.headerCell {
+    min-height: 100px;
+    flex-direction: column;
+    background-color: rgba(13, 31, 61, 0.5);
+}
+
+.headerCell h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--blanco-texto);
+}
+
+.headerCell p {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--acento-verde);
+}
+
+.valueCell {
+    min-height: 60px;
+    color: var(--gris-texto);
+}
+
+.buttonCell {
+    padding: 2rem 1rem;
+    border-bottom: none;
+}
+
+/* --- Estilos del Plan Destacado --- */
+.highlighted {
+    border: 2px solid var(--acento-verde);
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+}
+
+.highlighted .headerCell {
+    background-color: rgba(57, 255, 20, 0.05);
+}
+
+.ctaButton {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--acento-verde);
+  color: var(--acento-verde);
+  background-color: transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.ctaButton:hover {
+  background-color: var(--acento-verde);
+  color: var(--azul-oscuro);
+}

@@ -1,0 +1,65 @@
+.hero {
+  padding: 6rem 2rem;
+  text-align: center;
+  background-color: #0d1f3d;
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1; /* Asegura que el texto esté sobre las partículas */
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--gris-texto);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tableSection {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.ctaSection {
+    text-align: center;
+    padding: 6rem 2rem;
+    background-color: #0d1f3d;
+}
+
+.ctaSection h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.ctaButton {
+  background-color: var(--acento-verde, #39FF14);
+  color: var(--azul-oscuro, #0A192F);
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+}

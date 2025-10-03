@@ -1,0 +1,125 @@
+.section {
+  padding: 6rem 2rem;
+  background-color: var(--azul-oscuro);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-bottom: 4rem;
+  color: var(--blanco-texto);
+}
+
+.plansWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.planCard {
+  background-color: #112240;
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid #233554;
+  flex: 1;
+  min-width: 300px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.planCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Sombra mejorada */
+}
+
+.highlighted {
+  transform: scale(1.05);
+  border: 2px solid var(--acento-verde);
+  /* Efecto de brillo sutil */
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.2), 0 0 30px rgba(57, 255, 20, 0.1);
+}
+
+.highlighted:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--acento-verde);
+  color: var(--azul-oscuro);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.planName {
+  font-size: 1.8rem;
+  color: var(--blanco-texto);
+  margin-bottom: 0.5rem;
+}
+
+.planSubtitle {
+  color: var(--gris-texto);
+  margin-bottom: 1.5rem;
+}
+
+.planPrice {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--acento-verde);
+  margin-bottom: 1.5rem;
+}
+
+.planPrice small {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gris-texto);
+}
+
+.featuresList {
+  list-style: none;
+  margin-bottom: 2.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: var(--gris-texto);
+}
+
+.featuresList li::before {
+  content: '✓';
+  color: var(--acento-verde);
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.planButton {
+  display: inline-block;
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--acento-verde);
+  color: var(--acento-verde);
+  background-color: transparent;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.planButton:hover {
+  background-color: var(--acento-verde);
+  color: var(--azul-oscuro);
+}
