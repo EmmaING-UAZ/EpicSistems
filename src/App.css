@@ -1,0 +1,10 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Esto empujará el footer hacia abajo si el contenido es corto */
+main {
+  flex-grow: 1;
+}
