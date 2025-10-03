@@ -1,0 +1,30 @@
+.postContainer {
+    padding: 120px 2rem 4rem; /* Padding superior para compensar el Header fijo */
+}
+
+.postHeader {
+    max-width: 80ch; /* Limita el ancho para mejor legibilidad */
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.postHeader h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+}
+
+.postContent {
+    max-width: 70ch; /* Ancho de columna ideal para lectura */
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--gris-texto);
+}
+
+.backLink {
+    display: inline-block;
+    margin-top: 3rem;
+    color: var(--acento-verde);
+    text-decoration: none;
+    font-weight: 700;
+}
