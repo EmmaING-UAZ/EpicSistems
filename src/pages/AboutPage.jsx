@@ -62,7 +62,7 @@ const AboutPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* <img src={founderImage} alt="Fundador de Epic Sistems" /> */}
-            <div className={styles.imagePlaceholder}>Tu Foto Aquí</div>
+            <div className={styles.imagePlaceholder} role="img" aria-label="Fotografía del fundador de Epic Sistems">Tu Foto Aquí</div>
           </motion.div>
         </div>
       </section>
