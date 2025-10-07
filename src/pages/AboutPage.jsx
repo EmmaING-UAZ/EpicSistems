@@ -7,9 +7,8 @@ import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
 
-// Importa una imagen tuya de placeholder. Crea una carpeta 'images' en 'src/assets'
-// y guarda una foto tuya ahí. Por ahora, el path es un ejemplo.
-// import founderImage from '../assets/images/tu-foto.jpg';
+// 1. IMPORTAMOS TU FOTO (asegúrate que el path sea correcto)
+import founderImage from '../assets/founder.jpg'; // Reemplaza con la ruta correcta a tu imagen
 
 const AboutPage = () => {
   const particlesInit = useCallback(async (engine) => {
@@ -49,9 +48,16 @@ const AboutPage = () => {
             <p>
               Somos Epic Sistems, una agencia de desarrollo web y marketing digital con profundas raíces en Zacatecas, México. Nacimos con un propósito claro: potenciar a los negocios y emprendedores de nuestra región, creando un ecosistema donde el éxito de uno es el éxito de todos.
             </p>
+
+            {/* 2. AÑADIMOS TU PRESENTACIÓN PERSONAL */}
+            <h3>Un Rostro Detrás del Código</h3>
+            <p>
+              Mi nombre es Jesús Emmanuel Perea Martínez, fundador de Epic Sistems. Como desarrollador y estratega originario de Zacatecas, mi misión es personal: ofrecer la calidad y la tecnología de las grandes agencias a los emprendedores y negocios de mi tierra, con un trato directo, honesto y sin complicaciones.
+            </p>
+            
             <h2>Talento 100% Zacatecano.</h2>
             <p>
-              Nuestro equipo no solo trabaja aquí, somos de aquí. Cada desarrollador, estratega de marketing y diseñador gráfico en nuestro equipo es talento local, orgullosamente formado en la Universidad Autónoma de Zacatecas. Entendemos tu mercado porque es nuestro mercado. Hablamos tu idioma porque es el que usamos todos los días.
+              Nuestro equipo no solo trabaja aquí, somos de aquí. Cada desarrollador, estratega de marketing y diseñador gráfico en nuestro equipo es talento local, orgullosamente formado en la Universidad Autónoma de Zacatecas. Entendemos tu mercado porque es nuestro mercado.
             </p>
           </motion.div>
           <motion.div 
@@ -61,8 +67,8 @@ const AboutPage = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* <img src={founderImage} alt="Fundador de Epic Sistems" /> */}
-            <div className={styles.imagePlaceholder} role="img" aria-label="Fotografía del fundador de Epic Sistems">Tu Foto Aquí</div>
+            {/* 3. REEMPLAZAMOS EL PLACEHOLDER POR TU IMAGEN REAL */}
+            <img src={founderImage} alt="Fotografía de Jesús Emmanuel Perea Martínez, fundador de Epic Sistems" />
           </motion.div>
         </div>
       </section>
