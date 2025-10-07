@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './PlanesServicio.module.css';
+import { Link } from 'react-router-dom'; // Importamos Link para el botón
 
-// Datos de los planes para mantener el código limpio
+// --- DATOS DE LOS PLANES ACTUALIZADOS ---
 const planesData = [
   {
     nombre: 'Plan Plata',
     subtitulo: 'Página Informativa',
-    precio: '$2,200',
+    precioOriginal: '$2,200',
+    precioOferta: '$1,800',
     features: [
       'Hasta 3 Páginas',
       'Diseño Profesional y Moderno',
@@ -19,7 +21,8 @@ const planesData = [
   {
     nombre: 'Plan Oro',
     subtitulo: 'Landing Page Premium',
-    precio: '$5,500',
+    precioOriginal: '$5,500',
+    precioOferta: '$4,500',
     features: [
       'Página Única de Alto Impacto',
       'Enfocada en Conversión y Animaciones',
@@ -31,7 +34,8 @@ const planesData = [
   {
     nombre: 'Plan Platino',
     subtitulo: 'Tienda Online',
-    precio: '$15,000',
+    precioOriginal: '$15,000',
+    precioOferta: '$11,500',
     features: [
       'E-commerce Completo',
       'Carrito de Compras y Pagos en Línea',
@@ -77,15 +81,22 @@ const PlanesServicio = () => {
               {plan.highlighted && <div className={styles.popularBadge}>Más Popular</div>}
               <h3 className={styles.planName}>{plan.nombre}</h3>
               <p className={styles.planSubtitle}>{plan.subtitulo}</p>
-              <div className={styles.planPrice}>{plan.precio} <small>MXN</small></div>
+              
+              {/* --- BLOQUE DE PRECIO ACTUALIZADO --- */}
+              <div className={styles.priceContainer}>
+                <span className={styles.oldPrice}>{plan.precioOriginal}</span>
+                <div className={styles.offerPrice}>{plan.precioOferta} <small>MXN</small></div>
+                <span className={styles.offerBadge}>Oferta</span>
+              </div>
+
               <ul className={styles.featuresList}>
                 {plan.features.map((feature, i) => (
                   <li key={i}>{feature}</li>
                 ))}
               </ul>
-              <a href="#contact" className={styles.planButton}>
+              <Link to="/contacto" className={styles.planButton}>
                 Me Interesa
-              </a>
+              </Link>
             </motion.div>
           ))}
         </motion.div>

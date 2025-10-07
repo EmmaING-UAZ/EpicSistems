@@ -34,17 +34,18 @@
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  display: flex; /* Añadido para mejor control del layout interno */
+  flex-direction: column; /* Añadido */
 }
 
 .planCard:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Sombra mejorada */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .highlighted {
   transform: scale(1.05);
   border: 2px solid var(--acento-verde);
-  /* Efecto de brillo sutil */
   box-shadow: 0 0 15px rgba(57, 255, 20, 0.2), 0 0 30px rgba(57, 255, 20, 0.1);
 }
 
@@ -76,18 +77,44 @@
   margin-bottom: 1.5rem;
 }
 
-.planPrice {
+/* --- NUEVOS ESTILOS PARA PRECIOS DE OFERTA --- */
+.priceContainer {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.oldPrice {
+  font-size: 1.5rem;
+  color: #ff7575; /* Rojo para indicar precio anterior */
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.offerPrice {
   font-size: 3rem;
   font-weight: 800;
   color: var(--acento-verde);
-  margin-bottom: 1.5rem;
 }
 
-.planPrice small {
+.offerPrice small {
     font-size: 1rem;
     font-weight: 400;
     color: var(--gris-texto);
 }
+
+.offerBadge {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: #ff9800; /* Naranja para la etiqueta de oferta */
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 4px;
+    transform: rotate(15deg);
+}
+/* ------------------------------------------- */
 
 .featuresList {
   list-style: none;
@@ -97,6 +124,7 @@
   flex-direction: column;
   gap: 1rem;
   color: var(--gris-texto);
+  flex-grow: 1; /* Hace que esta sección crezca para empujar el botón hacia abajo */
 }
 
 .featuresList li::before {

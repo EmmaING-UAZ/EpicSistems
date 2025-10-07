@@ -15,40 +15,68 @@ const ProblemaSolucion = () => {
     'Tu Web Lista en Días',
   ];
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' }
+    },
+  };
+
   return (
     <motion.section 
       className={styles.section}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.8 }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.2 }}
     >
       <div className={styles.container}>
-        <h2 className={styles.mainTitle}>¿Cansado de Falsas Promesas y Costos Ocultos?</h2>
+        <motion.h2 className={styles.mainTitle} variants={itemVariants}>
+          ¿Cansado de Falsas <span className={styles.highlight}>PROMESAS</span> y Costos Ocultos?
+        </motion.h2>
+        
         <div className={styles.columnsWrapper}>
           {/* Columna del Problema */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle} id={styles.problemaTitle}>El Problema</h3>
+          <motion.div 
+            className={`${styles.column} ${styles.problemaColumn}`}
+            variants={itemVariants}
+          >
+            <motion.h3 
+              className={styles.columnTitle}
+              variants={itemVariants}
+            >
+              El Problema
+            </motion.h3>
             <ul className={styles.list}>
               {problemas.map((item, index) => (
-                <li key={index} className={styles.listItem}>
+                <motion.li key={index} className={styles.listItem} variants={itemVariants}>
                   <span className={`${styles.icon} ${styles.problemaIcon}`}>❌</span> {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Columna de la Solución */}
-          <div className={styles.column}>
-            <h3 className={styles.columnTitle} id={styles.solucionTitle}>La Solución</h3>
+          <motion.div 
+            className={`${styles.column} ${styles.solucionColumn}`}
+            variants={itemVariants}
+          >
+            <motion.h3 
+              className={`${styles.columnTitle} ${styles.solucionTitle}`}
+              variants={itemVariants}
+            >
+              La Solución
+            </motion.h3>
             <ul className={styles.list}>
               {soluciones.map((item, index) => (
-                <li key={index} className={styles.listItem}>
+                <motion.li key={index} className={styles.listItem} variants={itemVariants}>
                   <span className={`${styles.icon} ${styles.solucionIcon}`}>✅</span> {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </motion.section>

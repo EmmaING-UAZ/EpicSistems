@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; // <-- 1. IMPORTAMOS EL COMPONENTE Link
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
@@ -29,7 +30,6 @@ const itemVariants = {
 
 const Hero = () => {
   const particlesInit = useCallback(async (engine) => {
-    // Esta es la forma correcta de inicializar el motor de partículas
     await loadSlim(engine);
   }, []);
 
@@ -61,9 +61,10 @@ const Hero = () => {
         </motion.p>
         
         <motion.div variants={itemVariants}>
-          <a href="#contact" className={styles.ctaButton}>
+          {/* v-- 2. CAMBIAMOS <a> POR <Link> Y `href` POR `to` --v */}
+          <Link to="/contacto" className={styles.ctaButton}>
             SOLICITAR DEMO GRATUITA
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
     </section>

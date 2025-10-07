@@ -67,6 +67,35 @@
   color: var(--blanco-texto);
 }
 
+/* --- NUEVOS ESTILOS PARA ICONOS SOCIALES --- */
+.socialIconsContainer {
+    margin-top: 3rem;
+}
+
+.socialIconsContainer h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blanco-texto);
+    margin-bottom: 1rem;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.socialIcons a {
+    color: var(--gris-texto);
+    font-size: 1.8rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.socialIcons a:hover {
+    color: var(--acento-verde);
+    transform: translateY(-3px);
+}
+/* ------------------------------------------- */
+
 .formColumn {
   background-color: #112240;
   padding: 2.5rem;
@@ -119,7 +148,6 @@
 .submitButton:hover {
   opacity: 0.85;
 }
-
 
 @media (max-width: 768px) {
     .gridContainer {

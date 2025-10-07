@@ -19,16 +19,30 @@
   min-width: 200px;
 }
 
+.brandContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+}
+
 .brandName {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--blanco-texto);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 
 .slogan {
   font-size: 0.9rem;
   color: var(--gris-texto);
+  padding-left: 5px;
 }
 
 .columnTitle {
@@ -43,6 +57,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding: 0;
 }
 
 .navList a {
@@ -62,18 +77,19 @@
 
 .socialIcons {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem; /* Espacio entre los íconos */
 }
 
 .socialIcons a {
   color: var(--gris-texto);
   text-decoration: none;
-  font-size: 1.5rem;
-  transition: color 0.2s ease;
+  font-size: 1.6rem; /* Tamaño más grande para los íconos */
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .socialIcons a:hover {
   color: var(--acento-verde);
+  transform: translateY(-3px);
 }
 
 .footerBottom {
@@ -83,4 +99,40 @@
   border-top: 1px solid #233554;
   font-size: 0.9rem;
   color: var(--gris-texto);
+}
+
+/* --- ESTILOS PARA EL BOTÓN FLOTANTE DE WHATSAPP --- */
+.whatsappFloatButton {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25d366; /* Color de WhatsApp */
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* Asegura que no tenga subrayado */
+}
+
+.whatsappFloatButton:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsivo para el botón flotante */
+@media (max-width: 600px) {
+    .whatsappFloatButton {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        bottom: 15px;
+        right: 15px;
+    }
 }

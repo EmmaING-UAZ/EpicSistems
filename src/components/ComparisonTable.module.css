@@ -1,13 +1,13 @@
 .tableContainer {
     max-width: 1200px;
     margin: 0 auto;
-    overflow-x: auto; /* Para que sea responsiva en móviles */
+    overflow-x: auto;
 }
 
 .table {
     display: flex;
     width: 100%;
-    min-width: 800px; /* Ancho mínimo para evitar que se comprima demasiado */
+    min-width: 800px;
     border: 1px solid #233554;
     border-radius: 10px;
     background-color: #112240;
@@ -37,10 +37,11 @@
     justify-content: flex-start;
     font-weight: 600;
     color: var(--blanco-texto);
+    min-height: 60px; /* Alinea con valueCell */
 }
 
 .headerCell {
-    min-height: 100px;
+    min-height: 120px; /* Aumentamos altura para el precio tachado */
     flex-direction: column;
     background-color: rgba(13, 31, 61, 0.5);
 }
@@ -51,11 +52,28 @@
     color: var(--blanco-texto);
 }
 
-.headerCell p {
+/* --- NUEVOS ESTILOS PARA PRECIOS DE OFERTA --- */
+.priceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oldPrice {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ff7575;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.offerPrice {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--acento-verde);
+    line-height: 1.2;
 }
+/* ------------------------------------------- */
 
 .valueCell {
     min-height: 60px;
@@ -64,10 +82,10 @@
 
 .buttonCell {
     padding: 2rem 1rem;
+    min-height: 110px; /* Altura fija para alinear botones */
     border-bottom: none;
 }
 
-/* --- Estilos del Plan Destacado --- */
 .highlighted {
     border: 2px solid var(--acento-verde);
     transform: scale(1.02);

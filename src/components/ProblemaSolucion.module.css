@@ -1,57 +1,113 @@
 .section {
-  padding: 6rem 2rem;
+  padding: 8rem 2rem;
   background-color: var(--azul-oscuro);
+  position: relative;
+  overflow: hidden;
+  /* Fondo con la rejilla como en la imagen */
+  background-image: linear-gradient(0deg, rgba(17,34,64,0.7) 1px, transparent 1px), 
+                    linear-gradient(90deg, rgba(17,34,64,0.7) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .mainTitle {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  margin-bottom: 4rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 5rem;
   color: var(--blanco-texto);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.highlight {
+    color: var(--acento-verde);
 }
 
 .columnsWrapper {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
 .column {
-  background-color: #112240; /* Un azul un poco más claro */
-  padding: 2rem;
-  border-radius: 10px;
-  border: 1px solid #233554;
+  background-color: #112240;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  /* Eliminamos el border directo para usar box-shadow como borde neón */
   flex: 1;
-  min-width: 300px;
-  max-width: 400px;
+  min-width: 320px;
+  max-width: 500px;
   text-align: left;
+  position: relative; /* Necesario para los pseudoelementos si los usamos más adelante */
+  transition: all 0.3s ease;
+  
+  /* Efecto de borde neón más delgado y con desenfoque en las esquinas */
+  box-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.1), /* Sutil brillo interior */
+    0 0 0 1.5px; /* Aquí se define el "borde" más delgado, el color se define abajo */
+  
+  /* Animación al pasar el ratón */
+  cursor: default; /* No es interactivo, así que no cambia el cursor */
 }
 
+.column:hover {
+    transform: translateY(-5px); /* Una ligera elevación al pasar el ratón */
+    box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.2), /* Más brillo interior al hover */
+        0 0 0 2px, /* Borde más pronunciado al hover */
+        0 0 15px var(--hover-color); /* Efecto neón exterior */
+}
+
+/* Colores de neón para los problemas */
+.problemaColumn {
+    box-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.1),
+        0 0 0 1.5px #ff7575; /* Borde rojo */
+}
+.problemaColumn:hover {
+    --hover-color: #ff7575; /* Variable para el hover */
+}
+
+/* Colores de neón para las soluciones */
+.solucionColumn {
+    box-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.1),
+        0 0 0 1.5px #39FF14; /* Borde verde */
+}
+.solucionColumn:hover {
+    --hover-color: #39FF14; /* Variable para el hover */
+}
+
+
 .columnTitle {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
   text-align: center;
 }
 
-#problemaTitle {
-  color: #ff7575; /* Rojo para el problema */
+.problemaColumn .columnTitle {
+  color: #ff7575;
 }
-
-#solucionTitle {
-  color: var(--acento-verde); /* Verde para la solución */
+.solucionColumn .columnTitle {
+  color: #39FF14;
 }
 
 .list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 0;
 }
 
 .listItem {
@@ -59,9 +115,55 @@
   color: var(--gris-texto);
   display: flex;
   align-items: center;
+  line-height: 1.4;
 }
 
 .icon {
-  margin-right: 0.8rem;
-  font-size: 1.2rem;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+}
+
+.problemaIcon {
+  color: #ff7575;
+}
+
+.solucionIcon {
+  color: #39FF14;
+}
+
+
+/* Responsive */
+@media (max-width: 992px) {
+  .columnsWrapper {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .column {
+      max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+    .section {
+        padding: 6rem 1rem;
+    }
+    .mainTitle {
+        margin-bottom: 4rem;
+    }
+    .columnTitle {
+        margin-bottom: 2rem;
+    }
+    .column {
+        padding: 2rem 1.5rem;
+    }
+    .listItem {
+        font-size: 1rem;
+    }
+    .icon {
+        font-size: 1.3rem;
+    }
 }

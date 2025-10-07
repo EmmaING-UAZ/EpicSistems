@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './ComparisonTable.module.css';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
+// --- DATOS DE LOS PLANES ACTUALIZADOS ---
 const planesData = {
   features: [
     'Número de Páginas',
@@ -17,7 +19,8 @@ const planesData = {
   planes: [
     {
       name: 'Plan Plata',
-      price: '$2,200 MXN',
+      priceOriginal: '$2,200 MXN',
+      priceOferta: '$1,800 MXN',
       isHighlighted: false,
       values: [
         'Hasta 3',
@@ -33,7 +36,8 @@ const planesData = {
     },
     {
       name: 'Plan Oro',
-      price: '$5,500 MXN',
+      priceOriginal: '$5,500 MXN',
+      priceOferta: '$4,500 MXN',
       isHighlighted: true,
       values: [
         'Hasta 6',
@@ -49,7 +53,8 @@ const planesData = {
     },
     {
       name: 'Plan Platino',
-      price: '$15,000 MXN',
+      priceOriginal: '$15,000 MXN',
+      priceOferta: '$11,500 MXN',
       isHighlighted: false,
       values: [
         '8 o más',
@@ -76,6 +81,7 @@ const ComparisonTable = () => {
           {planesData.features.map((feature, index) => (
             <div key={index} className={styles.featureCell}>{feature}</div>
           ))}
+           <div className={styles.buttonCell}></div> {/* Celda vacía para alinear con botones */}
         </div>
 
         {/* Columnas de los Planes */}
@@ -90,13 +96,17 @@ const ComparisonTable = () => {
           >
             <div className={styles.headerCell}>
               <h3>{plan.name}</h3>
-              <p>{plan.price}</p>
+              {/* --- BLOQUE DE PRECIO ACTUALIZADO --- */}
+              <div className={styles.priceContainer}>
+                <span className={styles.oldPrice}>{plan.priceOriginal}</span>
+                <p className={styles.offerPrice}>{plan.priceOferta}</p>
+              </div>
             </div>
             {plan.values.map((value, valueIndex) => (
               <div key={valueIndex} className={styles.valueCell}>{value}</div>
             ))}
             <div className={styles.buttonCell}>
-                <a href="#" className={styles.ctaButton}>Me Interesa</a>
+                <Link to="/contacto" className={styles.ctaButton}>Me Interesa</Link>
             </div>
           </motion.div>
         ))}
