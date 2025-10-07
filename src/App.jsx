@@ -13,10 +13,12 @@ import SinglePostPage from './pages/SinglePostPage'; // 1. Importa la nueva pág
 import Footer from './components/Footer';
 import Header from './components/Header';
 import './App.css';
+import ScrollToTop from './components/ScrollToTop'; // 1. IMPORTA EL COMPONENTE
 
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <div className="App">
         <Header />
         <Routes>
