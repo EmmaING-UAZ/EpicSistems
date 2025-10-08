@@ -9,6 +9,7 @@ import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import SinglePostPage from './pages/SinglePostPage'; // 1. Importa la nueva página
 import NotFoundPage from './pages/NotFoundPage';
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 // Components
 import Footer from './components/Footer';
@@ -20,6 +21,7 @@ function App() {
   return (
     <BrowserRouter>
     <ScrollToTop />
+    <AnalyticsTracker />
       <div className="App">
         <Header />
         <Routes>
