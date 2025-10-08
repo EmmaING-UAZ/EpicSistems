@@ -1,9 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react'; // 1. Añadimos useEffect
 import styles from './ContactPage.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Modal from '../components/Modal';
 
-// Imports de Partículas e Iconos
+// 2. Nuevas importaciones de Formspree
+import { useForm, ValidationError } from '@formspree/react';
+
+// ... (El resto de tus imports de partículas e iconos se mantienen igual)
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
@@ -13,48 +16,20 @@ import { MdOutlineMail, MdDoneAll } from "react-icons/md";
 const ContactPage = () => {
   const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [errors, setErrors] = useState({});
+  // 3. Añadimos el hook de Formspree con tu ID
+  const [state, handleSubmit] = useForm("xdkwlzvb");
+
+  // Eliminamos los useState y funciones de validación manuales que teníamos
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) { setErrors(prev => { const newErrors = { ...prev }; delete newErrors[name]; return newErrors; }); }
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
-    else if (formData.name.length < 3) newErrors.name = 'El nombre debe tener al menos 3 caracteres.';
-    if (!formData.email) newErrors.email = 'El correo es obligatorio.';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'El formato del correo no es válido.';
-    if (!formData.message) newErrors.message = 'El mensaje es obligatorio.';
-    else if (formData.message.length < 3) newErrors.message = 'El mensaje debe tener al menos 3 caracteres.';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      const netlifyFormData = new URLSearchParams({ "form-name": "contact", ...formData });
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: netlifyFormData.toString(),
-      })
-      .then(() => {
-        setErrors({});
-        setFormData({ name: '', email: '', message: '' });
-        setIsModalOpen(true);
-        setTimeout(() => setIsModalOpen(false), 4000);
-      })
-      .catch((error) => alert(error));
+  
+  // 4. Usamos useEffect para mostrar nuestro modal de éxito cuando Formspree termine
+  useEffect(() => {
+    if (state.succeeded) {
+      setIsModalOpen(true);
+      setTimeout(() => setIsModalOpen(false), 4000); // Mantenemos el cierre automático
     }
-  };
+  }, [state.succeeded]);
+
 
   return (
     <>
@@ -71,72 +46,49 @@ const ContactPage = () => {
 
         <section className={styles.contentSection}>
           <div className={styles.gridContainer}>
-            {/* --- SECCIÓN RESTAURADA --- */}
-            <motion.div 
-              className={styles.infoColumn} 
-              initial={{ opacity: 0, x: -50 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              viewport={{ once: true }} 
-              transition={{ duration: 0.8 }}
-            >
+            {/* La columna de información se mantiene igual */}
+            <motion.div className={styles.infoColumn} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <h3>Información de Contacto</h3>
               <p>¿Tienes una pregunta o quieres empezar? Envíame un mensaje o contáctame por mis redes. Te responderé en menos de 24 horas.</p>
-              <a href="mailto:epic.systems.mx@gmail.com" className={styles.emailButton}>
-                <MdOutlineMail className={styles.emailIcon} />
-                <span>epic.systems.mx@gmail.com</span>
-              </a>
-              <div className={styles.infoItem}>
-                <strong>WhatsApp:</strong> 492-223-7517
-              </div>
-              <div className={styles.infoItem}>
-                <strong>Ubicación:</strong> Guadalupe, Zacatecas, México (Servicio 100% Digital)
-              </div>
+              <a href="mailto:epic.systems.mx@gmail.com" className={styles.emailButton}><MdOutlineMail className={styles.emailIcon} /><span>epic.systems.mx@gmail.com</span></a>
+              <div className={styles.infoItem}><strong>WhatsApp:</strong> 492-223-7517</div>
+              <div className={styles.infoItem}><strong>Ubicación:</strong> Guadalupe, Zacatecas, México (Servicio 100% Digital)</div>
               <div className={styles.socialIconsContainer}>
                   <h4>Síguenos</h4>
-                  <div className={styles.socialIcons}>
-                      <a href="https://www.facebook.com/profile.php?id=61551867218288" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
-                      <a href="https://www.instagram.com/epic_systems_mx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
-                      <a href="https://www.tiktok.com/@epic.sistems" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a>
-                  </div>
+                  <div className={styles.socialIcons}><a href="https://www.facebook.com/profile.php?id=61551867218288" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a><a href="https://www.instagram.com/epic_systems_mx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a><a href="https://www.tiktok.com/@epic.sistems" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a></div>
               </div>
             </motion.div>
             
+            {/* --- 5. FORMULARIO ACTUALIZADO --- */}
             <motion.form 
-              name="contact" 
-              data-netlify="true" 
-              data-netlify-honeypot="bot-field" 
               className={styles.formColumn} 
-              onSubmit={handleSubmit} 
-              noValidate 
+              onSubmit={handleSubmit} // Usamos el handleSubmit de Formspree
               initial={{ opacity: 0, x: 50 }} 
               whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: true }} 
               transition={{ duration: 0.8 }}
             >
-              <input type="hidden" name="form-name" value="contact" />
-              <input name="bot-field" style={{ display: 'none' }} />
               <div className={styles.formGroup}>
                 <label htmlFor="name">Nombre</label>
-                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-                <AnimatePresence>
-                  {errors.name && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.name}</motion.p>}
-                </AnimatePresence>
+                <input id="name" type="text" name="name" required />
+                <ValidationError prefix="Nombre" field="name" errors={state.errors} className={styles.errorMessage} />
               </div>
+
               <div className={styles.formGroup}>
                 <label htmlFor="email">Correo Electrónico</label>
-                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-                <AnimatePresence>
-                  {errors.email && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.email}</motion.p>}
-                </AnimatePresence>
+                <input id="email" type="email" name="email" required />
+                <ValidationError prefix="Email" field="email" errors={state.errors} className={styles.errorMessage} />
               </div>
+
               <div className={styles.formGroup}>
                 <label htmlFor="message">Mensaje</label>
-                <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange}></textarea>
-                <AnimatePresence>
-                  {errors.message && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.message}</motion.p>}
-                </AnimatePresence>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <ValidationError prefix="Mensaje" field="message" errors={state.errors} className={styles.errorMessage} />
               </div>
-              <button type="submit" className={styles.submitButton}>Enviar Mensaje</button>
+
+              <button type="submit" className={styles.submitButton} disabled={state.submitting}>
+                {state.submitting ? 'Enviando...' : 'Enviar Mensaje'}
+              </button>
             </motion.form>
           </div>
         </section>
@@ -146,7 +98,7 @@ const ContactPage = () => {
         <div className={styles.successMessageContainer}>
           <MdDoneAll className={styles.successIcon} />
           <h2>¡Mensaje Enviado!</h2>
-          <p>Gracias por contactarnos. Te responderemos en breve.</p>
+          <p>Gracias por tu interés. Hemos recibido tu mensaje correctamente.</p>
         </div>
       </Modal>
     </>
