@@ -34,35 +34,25 @@ const ContactPage = () => {
     return newErrors;
   };
 
-   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Prepara los datos para el envío con AJAX compatible con Netlify
-      const formDataWithEncoder = new URLSearchParams({
-        "form-name": "contact",
-        ...formData,
-      }).toString();
-
-      // Envía los datos usando fetch
+      const netlifyFormData = new URLSearchParams({ "form-name": "contact", ...formData });
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: formDataWithEncoder,
+        body: netlifyFormData.toString(),
       })
       .then(() => {
-        // Si el envío es exitoso...
         setErrors({});
-        setFormData({ name: '', email: '', message: '' }); // Limpia el formulario
-        setIsModalOpen(true); // Abre el modal
-        setTimeout(() => setIsModalOpen(false), 4000); // Cierra el modal después de 4 seg
+        setFormData({ name: '', email: '', message: '' });
+        setIsModalOpen(true);
+        setTimeout(() => setIsModalOpen(false), 4000);
       })
-      .catch((error) => {
-        // Si hay un error de red...
-        alert("Hubo un error al enviar el formulario: " + error);
-      });
+      .catch((error) => alert(error));
     }
   };
 
@@ -81,24 +71,71 @@ const ContactPage = () => {
 
         <section className={styles.contentSection}>
           <div className={styles.gridContainer}>
-            <motion.div className={styles.infoColumn} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            {/* --- SECCIÓN RESTAURADA --- */}
+            <motion.div 
+              className={styles.infoColumn} 
+              initial={{ opacity: 0, x: -50 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.8 }}
+            >
               <h3>Información de Contacto</h3>
               <p>¿Tienes una pregunta o quieres empezar? Envíame un mensaje o contáctame por mis redes. Te responderé en menos de 24 horas.</p>
-              <a href="mailto:epic.systems.mx@gmail.com" className={styles.emailButton}><MdOutlineMail className={styles.emailIcon} /><span>epic.systems.mx@gmail.com</span></a>
-              <div className={styles.infoItem}><strong>WhatsApp:</strong> 492-223-7517</div>
-              <div className={styles.infoItem}><strong>Ubicación:</strong> Guadalupe, Zacatecas, México (Servicio 100% Digital)</div>
+              <a href="mailto:epic.systems.mx@gmail.com" className={styles.emailButton}>
+                <MdOutlineMail className={styles.emailIcon} />
+                <span>epic.systems.mx@gmail.com</span>
+              </a>
+              <div className={styles.infoItem}>
+                <strong>WhatsApp:</strong> 492-223-7517
+              </div>
+              <div className={styles.infoItem}>
+                <strong>Ubicación:</strong> Guadalupe, Zacatecas, México (Servicio 100% Digital)
+              </div>
               <div className={styles.socialIconsContainer}>
                   <h4>Síguenos</h4>
-                  <div className={styles.socialIcons}><a href="https://www.facebook.com/profile.php?id=61551867218288" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a><a href="https://www.instagram.com/epic_systems_mx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a><a href="https://www.tiktok.com/@epic.sistems" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a></div>
+                  <div className={styles.socialIcons}>
+                      <a href="https://www.facebook.com/profile.php?id=61551867218288" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+                      <a href="https://www.instagram.com/epic_systems_mx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+                      <a href="https://www.tiktok.com/@epic.sistems" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a>
+                  </div>
               </div>
             </motion.div>
             
-            <motion.form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" className={styles.formColumn} onSubmit={handleSubmit} noValidate initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+            <motion.form 
+              name="contact" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field" 
+              className={styles.formColumn} 
+              onSubmit={handleSubmit} 
+              noValidate 
+              initial={{ opacity: 0, x: 50 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.8 }}
+            >
               <input type="hidden" name="form-name" value="contact" />
               <input name="bot-field" style={{ display: 'none' }} />
-              <div className={styles.formGroup}><label htmlFor="name">Nombre</label><input type="text" id="name" name="name" value={formData.name} onChange={handleChange} /><AnimatePresence>{errors.name && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.name}</motion.p>}</AnimatePresence></div>
-              <div className={styles.formGroup}><label htmlFor="email">Correo Electrónico</label><input type="email" id="email" name="email" value={formData.email} onChange={handleChange} /><AnimatePresence>{errors.email && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.email}</motion.p>}</AnimatePresence></div>
-              <div className={styles.formGroup}><label htmlFor="message">Mensaje</label><textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange}></textarea><AnimatePresence>{errors.message && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.message}</motion.p>}</AnimatePresence></div>
+              <div className={styles.formGroup}>
+                <label htmlFor="name">Nombre</label>
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+                <AnimatePresence>
+                  {errors.name && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.name}</motion.p>}
+                </AnimatePresence>
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+                <AnimatePresence>
+                  {errors.email && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.email}</motion.p>}
+                </AnimatePresence>
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="message">Mensaje</label>
+                <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange}></textarea>
+                <AnimatePresence>
+                  {errors.message && <motion.p className={styles.errorMessage} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>{errors.message}</motion.p>}
+                </AnimatePresence>
+              </div>
               <button type="submit" className={styles.submitButton}>Enviar Mensaje</button>
             </motion.form>
           </div>
