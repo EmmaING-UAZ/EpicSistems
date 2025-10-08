@@ -34,26 +34,35 @@ const ContactPage = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      const netlifyFormData = new URLSearchParams({ "form-name": "contact", ...formData });
+      // Prepara los datos para el envío con AJAX compatible con Netlify
+      const formDataWithEncoder = new URLSearchParams({
+        "form-name": "contact",
+        ...formData,
+      }).toString();
+
+      // Envía los datos usando fetch
       fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: netlifyFormData.toString(),
+        body: formDataWithEncoder,
       })
       .then(() => {
+        // Si el envío es exitoso...
         setErrors({});
-        setFormData({ name: '', email: '', message: '' });
-        setIsModalOpen(true);
-        // --- LÍNEA AÑADIDA PARA EL CIERRE AUTOMÁTICO ---
-        setTimeout(() => setIsModalOpen(false), 4000); // El modal se cierra después de 4 segundos
+        setFormData({ name: '', email: '', message: '' }); // Limpia el formulario
+        setIsModalOpen(true); // Abre el modal
+        setTimeout(() => setIsModalOpen(false), 4000); // Cierra el modal después de 4 seg
       })
-      .catch((error) => alert(error));
+      .catch((error) => {
+        // Si hay un error de red...
+        alert("Hubo un error al enviar el formulario: " + error);
+      });
     }
   };
 
