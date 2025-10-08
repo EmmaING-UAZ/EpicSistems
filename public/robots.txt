@@ -1,6 +1,4 @@
-# Allow all web crawlers to access all content
 User-agent: *
 Disallow:
 
-# Sitemap location (optional, add later if a sitemap is generated)
-# Sitemap: https://epicsistems.com/sitemap.xml
+Sitemap: https://epicsistems.com/sitemap.xml

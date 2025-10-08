@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'; // 1. Importamos Link
 import styles from './Cierre.module.css';
 
 // 2. Importamos los logos desde la carpeta de assets
-import logo7tynien from '../assets/logos/logo-7tynine.png';
-import logoPirona from '../assets/logos/logo-pirona.png';
-import logoTerrazac from '../assets/logos/logo-terrazac.png';
+import logo7tynien from '../assets/logos/logo-7tynine.webp';
+import logoPirona from '../assets/logos/logo-pirona.webp';
+import logoTerrazac from '../assets/logos/logo-terrazac.webp';
 
 const Cierre = () => {
   return (
