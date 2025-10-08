@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--azul-oscuro);
+  color: var(--blanco-texto);
+  text-align: center;
+  overflow: hidden;
+  position: relative; /* <-- CAMBIO IMPORTANTE */
+}
+
+/* --- ESTILOS PARA LAS PARTÍCULAS --- */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Lo pone detrás del contenido */
+}
+/* ---------------------------------- */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative; /* <-- CAMBIO IMPORTANTE */
+  z-index: 1;         /* <-- CAMBIO IMPORTANTE */
+}
+
+.errorCode {
+  font-size: clamp(6rem, 25vw, 12rem);
+  font-weight: 800;
+  color: var(--acento-verde);
+  line-height: 1;
+  text-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+}
+
+.errorCode span {
+    display: inline-block;
+}
+
+.content h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  text-transform: uppercase;
+}
+
+.content p {
+  max-width: 400px;
+  color: var(--gris-texto);
+  font-size: 1.1rem;
+}
+
+.homeButton {
+  background-color: transparent;
+  color: var(--acento-verde);
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--acento-verde);
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.homeButton:hover {
+  background-color: var(--acento-verde);
+  color: var(--azul-oscuro);
+}

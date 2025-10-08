@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import SinglePostPage from './pages/SinglePostPage'; // 1. Importa la nueva página
+import NotFoundPage from './pages/NotFoundPage';
 
 // Components
 import Footer from './components/Footer';
@@ -27,7 +28,8 @@ function App() {
           <Route path="/sobre-nosotros" element={<AboutPage />} />
           <Route path="/contacto" element={<ContactPage />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<SinglePostPage />} /> {/* 2. Añade la ruta dinámica */}
+          <Route path="/blog/:slug" element={<SinglePostPage />} /> 
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
       </div>
