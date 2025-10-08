@@ -33,13 +33,11 @@
     filter: grayscale(0%) opacity(100%);
 }
 
-/* --- ESTILOS PARA LOS LOGOS ACTUALIZADOS --- */
 .clientLogo {
-  max-height: 60px; /* Aumentamos la altura de 45px a 60px */
+  max-height: 60px;
   width: auto;
-  max-width: 200px; /* Aumentamos también el ancho máximo */
+  max-width: 200px;
 }
-/* ------------------------------------------- */
 
 .ctaContainer {
   max-width: 800px;
@@ -76,9 +74,31 @@
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
 }
 
 .ctaButton:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(57, 255, 20, 0.2);
+}
+
+/* --- NUEVA SECCIÓN PARA RESPONSIVE EN MÓVILES --- */
+@media (max-width: 480px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+
+  .ctaContainer {
+    padding: 3rem 1.5rem;
+  }
+
+  .ctaTitle {
+    font-size: 1.8rem;
+  }
+
+  .ctaButton {
+    padding: 1rem; /* Reducimos el padding horizontal */
+    font-size: 0.9rem; /* Hacemos la letra un poco más pequeña */
+    width: 100%; /* Hacemos que el botón ocupe todo el ancho disponible */
+  }
 }

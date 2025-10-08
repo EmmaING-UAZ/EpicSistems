@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react'; // 1. Añadimos useCallback
 import { motion } from 'framer-motion';
 import styles from './ProblemaSolucion.module.css';
+
+// --- Imports para las partículas ---
+import Particles from 'react-tsparticles';
+import { loadSlim } from 'tsparticles-slim';
+import particlesConfig from '../particlesConfig';
 
 const ProblemaSolucion = () => {
   const problemas = [
@@ -23,6 +28,11 @@ const ProblemaSolucion = () => {
       transition: { duration: 0.6, ease: 'easeOut' }
     },
   };
+  
+  // --- Lógica para inicializar las partículas ---
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
 
   return (
     <motion.section 
@@ -32,6 +42,14 @@ const ProblemaSolucion = () => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ staggerChildren: 0.2 }}
     >
+      {/* 2. AÑADIMOS EL COMPONENTE DE PARTÍCULAS */}
+      <Particles
+        id="tsparticles-problema-solucion" // ID único para esta sección
+        init={particlesInit}
+        options={particlesConfig}
+        className={styles.particles}
+      />
+      
       <div className={styles.container}>
         <motion.h2 className={styles.mainTitle} variants={itemVariants}>
           ¿Cansado de Falsas <span className={styles.highlight}>PROMESAS</span> y Costos Ocultos?

@@ -1,153 +1,60 @@
-.hero {
-  padding: 6rem 2rem;
+/* ... (Se mantienen todos los estilos desde .hero hasta .errorMessage) ... */
+.hero { padding: 6rem 2rem; text-align: center; background-color: #0d1f3d; position: relative; overflow: hidden; min-height: 40vh; display: flex; align-items: center; justify-content: center; }
+.particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+.heroContent { position: relative; z-index: 1; }
+.hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; color: var(--gris-texto); }
+.contentSection { padding: 6rem 2rem; }
+.gridContainer { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: flex-start; }
+.infoColumn h3 { font-size: 2rem; color: var(--blanco-texto); margin-bottom: 1.5rem; }
+.infoColumn p { color: var(--gris-texto); line-height: 1.8; margin-bottom: 2rem; }
+.infoItem { color: var(--gris-texto); margin-bottom: 1rem; }
+.infoItem strong { color: var(--blanco-texto); }
+.emailButton { display: inline-flex; align-items: center; gap: 0.75rem; background-color: #112240; border: 1px solid #233554; padding: 0.8rem 1.2rem; border-radius: 5px; text-decoration: none; color: var(--gris-texto); margin-bottom: 1rem; transition: all 0.3s ease; }
+.emailButton:hover { background-color: #172a45; color: var(--acento-verde); border-color: var(--acento-verde); }
+.emailIcon { font-size: 1.5rem; }
+.socialIconsContainer { margin-top: 3rem; }
+.socialIconsContainer h4 { font-size: 1.1rem; font-weight: 700; color: var(--blanco-texto); margin-bottom: 1rem; }
+.socialIcons { display: flex; gap: 1.5rem; }
+.socialIcons a { color: var(--gris-texto); font-size: 1.8rem; transition: color 0.3s ease, transform 0.3s ease; }
+.socialIcons a:hover { color: var(--acento-verde); transform: translateY(-3px); }
+.formColumn { background-color: #112240; padding: 2.5rem; border-radius: 10px; border: 1px solid #233554; }
+.formGroup { margin-bottom: 1.5rem; position: relative; }
+.formGroup label { display: block; margin-bottom: 0.5rem; color: var(--blanco-texto); font-weight: 600; }
+.formGroup input, .formGroup textarea { width: 100%; padding: 0.8rem 1rem; border-radius: 5px; border: 1px solid #233554; background-color: #0d1f3d; color: var(--blanco-texto); font-size: 1rem; background-image: none !important; }
+.formGroup input:focus, .formGroup textarea:focus { outline: none; border-color: var(--acento-verde); }
+.submitButton { background-color: var(--acento-verde, #39FF14); color: var(--azul-oscuro, #0A192F); padding: 1rem 2.5rem; border: none; border-radius: 5px; font-weight: 700; font-size: 1rem; text-transform: uppercase; cursor: pointer; transition: opacity 0.3s ease; width: 100%; }
+.submitButton:hover { opacity: 0.85; }
+.errorMessage { color: #ff7575; font-size: 0.85rem; margin-top: 0.5rem; font-weight: 500; }
+
+/* --- ESTILOS PARA EL CONTENIDO DEL MODAL DE ÉXITO --- */
+.successMessageContainer {
   text-align: center;
-  background-color: #0d1f3d;
-  position: relative;
-  overflow: hidden;
-  min-height: 40vh;
+  color: var(--blanco-texto);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 }
 
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+.successIcon {
+  font-size: 4rem;
+  color: var(--acento-verde);
 }
 
-.heroContent {
-  position: relative;
-  z-index: 1;
-}
-
-.hero h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  color: var(--gris-texto);
-}
-
-.contentSection {
-  padding: 6rem 2rem;
-}
-
-.gridContainer {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 3rem;
-  align-items: flex-start;
-}
-
-.infoColumn h3 {
+.successMessageContainer h2 {
   font-size: 2rem;
-  color: var(--blanco-texto);
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  color: var(--acento-verde);
 }
 
-.infoColumn p {
-  color: var(--gris-texto);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-.infoItem {
+.successMessageContainer p {
+  font-size: 1.1rem;
   color: var(--gris-texto);
   margin-bottom: 1rem;
-}
-.infoItem strong {
-  color: var(--blanco-texto);
-}
-
-/* --- NUEVOS ESTILOS PARA ICONOS SOCIALES --- */
-.socialIconsContainer {
-    margin-top: 3rem;
-}
-
-.socialIconsContainer h4 {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--blanco-texto);
-    margin-bottom: 1rem;
-}
-
-.socialIcons {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.socialIcons a {
-    color: var(--gris-texto);
-    font-size: 1.8rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.socialIcons a:hover {
-    color: var(--acento-verde);
-    transform: translateY(-3px);
 }
 /* ------------------------------------------- */
-
-.formColumn {
-  background-color: #112240;
-  padding: 2.5rem;
-  border-radius: 10px;
-  border: 1px solid #233554;
-}
-
-.formGroup {
-  margin-bottom: 1.5rem;
-}
-
-.formGroup label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--blanco-texto);
-  font-weight: 600;
-}
-
-.formGroup input,
-.formGroup textarea {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  border-radius: 5px;
-  border: 1px solid #233554;
-  background-color: #0d1f3d;
-  color: var(--blanco-texto);
-  font-size: 1rem;
-}
-
-.formGroup input:focus,
-.formGroup textarea:focus {
-  outline: none;
-  border-color: var(--acento-verde);
-}
-
-.submitButton {
-  background-color: var(--acento-verde, #39FF14);
-  color: var(--azul-oscuro, #0A192F);
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 5px;
-  font-weight: 700;
-  font-size: 1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  width: 100%;
-}
-
-.submitButton:hover {
-  opacity: 0.85;
-}
 
 @media (max-width: 768px) {
     .gridContainer {

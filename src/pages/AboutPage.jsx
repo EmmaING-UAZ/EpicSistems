@@ -7,8 +7,8 @@ import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
 
-// 1. IMPORTAMOS TU FOTO (asegúrate que el path sea correcto)
-import founderImage from '../assets/founder.jpg'; // Reemplaza con la ruta correcta a tu imagen
+
+import founderImage from '../assets/founder.jpg';
 
 const AboutPage = () => {
   const particlesInit = useCallback(async (engine) => {
