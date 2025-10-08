@@ -1,12 +1,12 @@
-import React, { useCallback, useState, useEffect } from 'react'; // 1. Añadimos useEffect
+import React, { useCallback, useState, useEffect, useRef } from 'react'; // 1. Importamos useRef
 import styles from './ContactPage.module.css';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Modal from '../components/Modal';
 
-// 2. Nuevas importaciones de Formspree
+// Nuevas importaciones de Formspree
 import { useForm, ValidationError } from '@formspree/react';
 
-// ... (El resto de tus imports de partículas e iconos se mantienen igual)
+// El resto de tus imports de partículas e iconos
 import Particles from 'react-tsparticles';
 import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
@@ -16,17 +16,20 @@ import { MdOutlineMail, MdDoneAll } from "react-icons/md";
 const ContactPage = () => {
   const particlesInit = useCallback(async (engine) => { await loadSlim(engine); }, []);
 
-  // 3. Añadimos el hook de Formspree con tu ID
   const [state, handleSubmit] = useForm("xdkwlzvb");
-
-  // Eliminamos los useState y funciones de validación manuales que teníamos
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // 4. Usamos useEffect para mostrar nuestro modal de éxito cuando Formspree termine
+  const formRef = useRef(null); // 2. Creamos una referencia para el formulario
+
   useEffect(() => {
     if (state.succeeded) {
       setIsModalOpen(true);
-      setTimeout(() => setIsModalOpen(false), 4000); // Mantenemos el cierre automático
+      
+      // 3. AÑADIMOS LA LÓGICA PARA RESETEAR EL FORMULARIO
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+
+      setTimeout(() => setIsModalOpen(false), 4000);
     }
   }, [state.succeeded]);
 
@@ -46,23 +49,22 @@ const ContactPage = () => {
 
         <section className={styles.contentSection}>
           <div className={styles.gridContainer}>
-            {/* La columna de información se mantiene igual */}
             <motion.div className={styles.infoColumn} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <h3>Información de Contacto</h3>
               <p>¿Tienes una pregunta o quieres empezar? Envíame un mensaje o contáctame por mis redes. Te responderé en menos de 24 horas.</p>
               <a href="mailto:epic.systems.mx@gmail.com" className={styles.emailButton}><MdOutlineMail className={styles.emailIcon} /><span>epic.systems.mx@gmail.com</span></a>
               <div className={styles.infoItem}><strong>WhatsApp:</strong> 492-223-7517</div>
-              <div className={styles.infoItem}><strong>Ubicación:</strong> Guadalupe, Zacatecas, México (Servicio 100% Digital)</div>
+              <div className={styles.infoItem}><strong>Ubicación:</strong> Zacatecas, Zacatecas, México (Servicio 100% Digital)</div>
               <div className={styles.socialIconsContainer}>
                   <h4>Síguenos</h4>
                   <div className={styles.socialIcons}><a href="https://www.facebook.com/profile.php?id=61551867218288" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a><a href="https://www.instagram.com/epic_systems_mx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a><a href="https://www.tiktok.com/@epic.sistems" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a></div>
               </div>
             </motion.div>
             
-            {/* --- 5. FORMULARIO ACTUALIZADO --- */}
             <motion.form 
+              ref={formRef} // 4. Asignamos la referencia al formulario
               className={styles.formColumn} 
-              onSubmit={handleSubmit} // Usamos el handleSubmit de Formspree
+              onSubmit={handleSubmit}
               initial={{ opacity: 0, x: 50 }} 
               whileInView={{ opacity: 1, x: 0 }} 
               viewport={{ once: true }} 

@@ -8,7 +8,7 @@ import { loadSlim } from 'tsparticles-slim';
 import particlesConfig from '../particlesConfig';
 
 
-import founderImage from '../assets/founder.jpg';
+import founderImage from '../assets/founder.webp';
 
 const AboutPage = () => {
   const particlesInit = useCallback(async (engine) => {
